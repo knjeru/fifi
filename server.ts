@@ -1,9 +1,19 @@
-import pogo from "https://deno.land/x/pogo/main.ts";
-import { APP_PORT } from "./config.ts"
-import router from "./routing.ts"
+import { Application } from "https://deno.land/x/oak/mod.ts";
+import { APP_PORT } from "./config.ts";
+import { dbClient } from "./app/config/db.config.ts";
+import debtsRouter from "./app/routes/debts.routes.ts";
 
-const server = pogo.server({port: APP_PORT});
+const app = new Application();
 
-server.route(router);
+
+// Register all available routes
+app.use(debtsRouter.routes());
+// app.use(expensesRouter.routes());
+
+
+// Setup DB connection
+await dbClient.connect()
+
+// Start server
 console.log(`Starting server at port ${APP_PORT}`)
-await server.start();
+await app.listen({port: APP_PORT});
