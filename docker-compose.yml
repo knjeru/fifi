@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+
+  postgres:
+    image: "postgres:12"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fifi
+    
+  deno-server:
+    build:
+      context: deno-server
+      dockerfile: DockerFile
+    ports:
+      - 4000:4000
+    depends_on:
+      - postgres
+    command: run --allow-net server.ts

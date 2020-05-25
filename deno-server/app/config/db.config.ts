@@ -7,8 +7,8 @@ export const dex = new Dex({
 });
 
 export const dbClient = new Client({
-    hostname: "localhost",
-    user: "kevin",
-    database: "fifi",
-    port: 5432
+    password: "postgres",
+    user: "postgres",
+    hostname: "postgres",
+    database: "fifi"
 });

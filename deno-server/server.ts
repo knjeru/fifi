@@ -11,9 +11,20 @@ const app = new Application();
 app.use(debtsRouter.routes());
 app.use(expensesRouter.routes());
 
-
 // Setup DB connection
-await dbClient.connect()
+const startDbConnection = async () => {
+    console.log('Attempting to start DB.')
+    await dbClient.connect().then(() => {
+        console.log('DB started successfully.')
+    }).catch(() => {
+        console.log('DB failed to start.')
+        setTimeout(() => {
+            console.log('Reconnecting.')
+            startDbConnection()
+        }, 5000);
+    });
+};
+startDbConnection();
 
 // Start server
 console.log(`Starting server at port ${APP_PORT}`)
