@@ -1,19 +1,19 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import { Expenses } from "../controllers/expenses.controller.ts"
 
+const CONTROLLER = new Expenses();
 
 const expensesRouter = new Router();
-const EXPENSES_CONTROLLER = new Expenses()
 
-expensesRouter.get('/api/get_expenses', EXPENSES_CONTROLLER.getAllExpenses);
-expensesRouter.get('/api/get_expense/:id', EXPENSES_CONTROLLER.getExpense);
+expensesRouter.get('/api/get_expenses', CONTROLLER.getAllExpenses);
+expensesRouter.get('/api/get_expense/:id', CONTROLLER.getExpense);
 
-expensesRouter.post('/api/add_expense', EXPENSES_CONTROLLER.addExpense);
-expensesRouter.put('/api/update_expense/:id', EXPENSES_CONTROLLER.updateExpense);
+expensesRouter.post('/api/add_expense', CONTROLLER.addExpense);
+expensesRouter.put('/api/update_expense/:id', CONTROLLER.updateExpense);
 
-expensesRouter.delete('/api/remove_expense/:id', EXPENSES_CONTROLLER.removeExpense)
+expensesRouter.delete('/api/remove_expense/:id', CONTROLLER.removeExpense)
 
 // TODO: Need to move to 
-expensesRouter.get('/api/create_expenses_table', EXPENSES_CONTROLLER.createExpensesTable);
+expensesRouter.get('/api/create_expenses_table', CONTROLLER.createExpensesTable);
 
 export default expensesRouter;

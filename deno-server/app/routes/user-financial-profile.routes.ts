@@ -1,9 +1,9 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import { UserFinancialProfile } from "../controllers/user-financial-profile.controller.ts";
 
+const CONTROLLER = new UserFinancialProfile()
 
 const userFinancialProfileRouter = new Router();
-const CONTROLLER = new UserFinancialProfile()
 
 userFinancialProfileRouter.get('/api/get_user_fp/:id', CONTROLLER.getUserFinancialProfile);
 
